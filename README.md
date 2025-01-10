@@ -1,6 +1,6 @@
 # lmmrotate 🎮
 
-We are still working in progress~
+We are still working in progress~ Hence, the codebase may be updated frequently
 
 [ArXiv]() | [ResearchGate (Full Text Available)]() | [Huggingface]()
 
@@ -110,7 +110,7 @@ bash scripts/eval_standalone.sh <checkpoint path>
 
 - visualization (for sampled 20 figures)
 ```shell
-bash scripts/eval_standalone.sh <checkpoint path> --shuffle_seed 42 --clip_num 20
+bash scripts/eval_standalone.sh <checkpoint path> --shuffle_seed 42 --clip_num 20 --vis
 ```
 
 ### Interface
