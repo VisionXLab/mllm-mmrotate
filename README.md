@@ -2,7 +2,7 @@
 
 We are still working in progress~ Hence, the codebase may be updated frequently
 
-[ArXiv]() | [ResearchGate (Full Text Available)]() | [Model (Huggingface)](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
+[ArXiv]() | [ResearchGate (Full Text Available)]() | [Model and Data (Huggingface)](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
 
 This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for rotated object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**, _ArXiv 25xx.xxxxx_, Qingyun Li, Yushi Chen, Xinya Shu, Dong Chen, Xin He, Yi Yu, and Xue Yang.
 
