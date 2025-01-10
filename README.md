@@ -6,6 +6,10 @@ This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for rot
 
 <img src="https://github.com/user-attachments/assets/cf18cc4c-d2d4-490b-87c0-3956d3b7cb9b" alt="framework" width="100%" />
 
+## Performance
+
+[Click here](https://github.com/user-attachments/assets/f61edcd2-1dee-4bdb-8a1e-c8dd1cf163a1) for the visualization of the MLM detector.
+
 ## Enviroment
 **NOTE: a misaligned enviroment between inference and training may cause bad effect.**
 
