@@ -1,4 +1,4 @@
-# lmmrotate
+# lmmrotate 🎮
 
 We are still working in progress~
 
