@@ -4,6 +4,8 @@
 
 This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for rotated object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**, _ArXiv 25xx.xxxxx_, Qingyun Li, Yushi Chen, Xinya Shu, Dong Chen, Xin He, Yi Yu, and Xue Yang.
 
+<img src="https://github.com/user-attachments/assets/cf18cc4c-d2d4-490b-87c0-3956d3b7cb9b" alt="framework" width="100%" />
+
 ## Enviroment
 **NOTE: a misaligned enviroment between inference and training may cause bad effect.**
 
