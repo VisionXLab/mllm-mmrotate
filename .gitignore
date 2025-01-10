@@ -1,0 +1,15 @@
+checkpoints*
+playground/data*
+*mmrotate_workdir*
+.vscode/launch.json
+tmp*
+.trash/**
+scripts_py/eval_rfcos/*
+scripts_py/eval_mmrotate/*
+scripts_py/mask_rcnn_demo/*
+**.pth
+**.pyc
+lmmrotate.egg-info/**
+data
+work_dirs/**
+**.svg

@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lmmrotate"
+version = "0.1.0"
+description = "A training codebase of multimodal language model for orientated detection."
+authors = [
+    { name = "Li-Qingyun", email = "962537281@qq.com" },
+    { name = "Xue Yang", email = "yangxue0827@126.com" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "torch==2.3.0",
+    "torchvision==0.18.0",
+    "transformers==4.45.0",
+    "peft",
+    "datasets",
+    "huggingface_hub",
+    "timm",
+    "deepspeed==0.14.4",
+    "accelerate>=0.29.1",
+    "numpy<2",
+    "einops",
+    "tensorboard",
+    "scipy", 
+    "scikit-learn", 
+    "rapidfuzz", 
+    "openmim", 
+    "fire",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[tool.setuptools.packages.find]
+include = ["lmmrotate*"]
+exclude = [
+    "checkpoints*",
+    "playground*",
+    "scripts*",
+    "scripts_sh*",
+    "scripts_py*",
+    "tests*",
+    "wandb*",
+]
+
+[tool.wheel]
+exclude = [
+    "checkpoints*",
+    "playground*",
+    "scripts*",
+    "scripts_sh*",
+    "scripts_py*",
+    "tests*",
+    "wandb*",
+]
