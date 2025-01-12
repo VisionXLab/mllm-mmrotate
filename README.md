@@ -1,10 +1,28 @@
+<p align="center">
+  <h1 align="center">A Simple Aerial Detection Baseline of Multimodal Language Models</h1>
+  <p align="center">
+      <a href='https://scholar.google.com/citations?hl=en&user=TvsTun4AAAAJ' style='text-decoration: none' >Qingyun Li</a><sup></sup>&emsp;
+      <a href='https://scholar.google.com/citations?user=A39S7JgAAAAJ&hl=en' style='text-decoration: none' >Yushi Chen</a><sup></sup>&emsp;
+      <a href='https://www.researchgate.net/profile/Shu-Xinya' style='text-decoration: none' >Xinya Shu</a><sup></sup>&emsp;      
+      <a href='https://scholar.google.com/citations?hl=en&user=UzPtYnQAAAAJ' style='text-decoration: none' >Dong Chen</a><sup></sup>&emsp;     
+      <a href='https://scholar.google.com/citations?hl=en&user=WQgE8l8AAAAJ' style='text-decoration: none' >Xin He</a><sup></sup>&emsp;     
+      <a href='https://scholar.google.com/citations?user=OYtSc4AAAAAJ&hl=en' style='text-decoration: none' >Yi Yu</a><sup></sup>&emsp;     
+      <a href='https://yangxue0827.github.io/' style='text-decoration: none' >Xue Yang</a><sup></sup>&emsp;
+      <div align="center">
+      <a href='https://arxiv.org/abs/xxxx.xxxxx'><img src='https://img.shields.io/badge/arXiv-xxxx.xxxxx-brown.svg?logo=arxiv&logoColor=white'></a>
+      <a href='https://github.com/Li-Qingyun/mllm-mmrotate'><img src='https://img.shields.io/badge/Github-page-yellow.svg?logo=Github&logoColor=white'></a>
+	  </div>
+    <p align='center'>
+        If you find our work helpful, please consider giving us a ⭐!
+    </p>
+   </p>
+</p>
+
 # lmmrotate 🎮
 
 We are still working in progress~ Hence, the codebase may be updated frequently
 
-[ArXiv]() | [ResearchGate (Full Text Available)]() | [Model and Data (Huggingface)](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
-
-This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for rotated object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**, _ArXiv 25xx.xxxxx_, Qingyun Li, Yushi Chen, Xinya Shu, Dong Chen, Xin He, Yi Yu, and Xue Yang.
+This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for oriented object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**.
 
 <img src="https://github.com/user-attachments/assets/cf18cc4c-d2d4-490b-87c0-3956d3b7cb9b" alt="framework" width="100%" />
 
@@ -139,3 +157,16 @@ Some options of the [map_nc eval script](lmmrotate/eval.py):
 - `split`: which splits to get evaluation results.
 - `clip_num`: when you want to get results fast or visualize the results, you can clip the dataset.
 - `shuffle_seed`: seed for clip dataset.
+
+## Citation
+
+If you find our paper or benchmark helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you very much!
+
+```bibtex
+@article{li2025lmmrotate,
+  title={A Simple Aerial Detection Baseline of Multimodal Language Models},
+  author={Li, Qingyun and Chen, Yushi and Shu, Xinya and Chen, Dong and He, Xin and Yu Yi and Yang, Xue },
+  journal={arXiv preprint arXiv:xxxx.xxxxx},
+  year={2025}
+}
+```
