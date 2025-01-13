@@ -122,13 +122,28 @@ bash scripts/florence-2-l_vis1024-lang2048_dota1-v2_b2x8xga2-100e.sh
 
 - evaluate the model on DOTA-v1.0:
 ```shell
-srun ... bash scripts/eval_slurm.sh <checkpoint path>
-bash scripts/eval_standalone.sh <checkpoint path>
+# get map nc
+srun ... bash scripts/eval_slurm.sh <checkpoint folder path>
+bash scripts/eval_standalone.sh <checkpoint folder path>
+# then get f1
+python -u -m lmmrotate.modules.f1_metric <checkpoint folder path>/<pkl file>
 ```
 
 - visualization (for sampled 20 figures)
 ```shell
-bash scripts/eval_standalone.sh <checkpoint path> --shuffle_seed 42 --clip_num 20 --vis
+bash scripts/eval_standalone.sh <checkpoint folder path> --shuffle_seed 42 --clip_num 20 --vis
+```
+
+- train a baseline detector and get the map, map_nc, and f1 score (take Rotated-RetinaNet@RSAR as an example)
+```shell
+# train the detector
+python -u playground/mmrotate_train.py playground/mmrotate_configs/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024.py --work-dir playground/mmrotate_workdir/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024
+# inference on test dataloader to get result pickle file
+python -u playground/mmrotate_test.py playground/mmrotate_configs/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024.py playground/mmrotate_workdir/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024/epoch_12.pth --out playground/mmrotate_workdir/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024/results_test.pkl
+# get map_ac (best of map_nc on a sequence of score thresholds)
+python -u playground/eval_mmrotate_detector_mapnc.py --dataset_name rsar --pickle_result_path playground/mmrotate_workdir/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024/results_test.pkl
+# get f1 (best of f1 on a sequence of score thresholds)
+python -u -m lmmrotate.modules.f1_metric playground/mmrotate_workdir/rotated-retinanet-rbox-le90_r50_fpn_1x_rsar-1024/results_test.pkl
 ```
 
 ### Interface

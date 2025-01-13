@@ -1,5 +1,3 @@
-# Use rotated-fcos-le90_r50_fpn_1x_dior-2 to draw the plot
-import os
 import pandas
 import random
 from fire import Fire
@@ -52,6 +50,12 @@ def prepare_evaluator(dataset_name):
             'classes':
             ('Cell-Container', 'Container', 'Dredger', 'Fishing', 'LawEnforce', 'ore-oil'),
         }
+    elif dataset_name == "rsar":
+        from mmrotate.evaluation import DOTAMetric
+        evaluator = Evaluator(DOTAMetric(metric="mAP"))
+        evaluator.dataset_meta = {'classes': ('ship', 'aircraft', 'car', 'tank', 'bridge', 'harbor')}
+    else:
+        raise NotImplementedError(f"Unknown dataset: {dataset_name}")
     return evaluator
 
 

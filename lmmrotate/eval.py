@@ -1,3 +1,24 @@
+"""
+# Inference with intermediate checkpoints (single node)
+PYTHONPATH="$PYTHONPATH:$(pwd)" torchrun --nproc_per_node=5 scripts_py/inference_on_dota.py \
+    --model_ckpt_path checkpoints/florence-2-l_dota1-v2_b2x4-200e \
+    --split trainval test --eval_intermediate_checkpoints
+    
+# Inference with intermediate checkpoints (slurm)
+NNODES=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | wc -l)
+export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
+HOSTNAMES=$(scontrol show hostnames "$SLURM_JOB_NODELIST")
+THEID=$(echo -e $HOSTNAMES | python3 -c "import sys;[sys.stdout.write(str(i)) for i,line in enumerate(next(sys.stdin).split(' ')) if line.strip() == '$(hostname)'.strip()]")
+echo MASTER_ADDR=$MASTER_ADDR
+echo HOSTNAMES=$HOSTNAMES
+echo SLURM_PROCID=$THEID
+PYTHONPATH="$PYTHONPATH:$(pwd)" torchrun --nnodes=$NNODES --nproc-per-node=8 \
+    --master_port 12955 --master_addr ${MASTER_ADDR} --node_rank ${THEID} \
+    scripts_py/inference_on_dota.py --model_ckpt_path \
+    checkpoints/florence-2-l_vis1024-lang2048_dota1-v2_b16x32-100e-slurm \
+    florence-2-l_vis1024-lang2048_dota1-v2_b16x32-400e-slurm \
+    --split trainval test --eval_intermediate_checkpoints
+"""
 import os
 import re
 import json
@@ -44,7 +65,7 @@ def parse_args():
     parser.add_argument("--vis", action="store_true", default=False)
     parser.add_argument("--pass_evaluate", action="store_true", default=False)
     # dataset options
-    parser.add_argument("--dataset_type", type=str, default=None, choices=["dota", "dior", "fair1m", "srsdd", "dota_train", "fair1m_2.0_train"])
+    parser.add_argument("--dataset_type", type=str, default=None, choices=["dota", "dior", "fair1m", "srsdd", "dota_train", "fair1m_2.0_train", "rsar"])
     parser.add_argument("--data_root", type=str, default=None)
     parser.add_argument("--split", type=str, default=["trainval", "test"], choices=["trainval", "test"], nargs="+")
     parser.add_argument("--shuffle_seed", type=int, default=42)
@@ -69,6 +90,8 @@ def parse_args():
                 return "fair1m"  # train on `trainval` split of 1.0, eval on `test` split of 1.0
             elif "srsdd" in path:
                 return "srsdd"  # train on `train` split, eval on `test` split
+            elif "rsar" in path:
+                return "rsar"  # train on `trainval` split, eval on `test` splir
         dataset_type_list = [determine_dataset_type(p) for p in args.model_ckpt_path]
         assert all([d == dataset_type_list[0] for d in dataset_type_list]), \
             f"Dataset type should be the same for all model_ckpt_path {args.model_ckpt_path}"
@@ -224,6 +247,9 @@ def get_evaluator(dataset_type, is_test_set, results_path=None):
     elif dataset_type == "srsdd":
         from mmrotate.evaluation import DOTAMetric
         return set_split_attr(DOTAMetric(metric="mAP"), "test" if is_test_set else "train")
+    elif dataset_type == "rsar":
+        from mmrotate.evaluation import DOTAMetric
+        return set_split_attr(DOTAMetric(metric="mAP"), "test" if is_test_set else "trainval")
     else:
         raise ValueError(f"Unknown dataset type {dataset_type}")
           

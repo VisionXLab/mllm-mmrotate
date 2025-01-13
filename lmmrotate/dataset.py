@@ -1,5 +1,6 @@
 import os
 import json
+import math
 import random
 from PIL import Image
 
@@ -54,7 +55,11 @@ class OrientedDetSFTDataset(Dataset):
                     self.list_data_dict.extend(list_data_dict)
         
         elif self.data_args.dataset_mode == "balanced concat":
-            if not hasattr(self, "list_all_data_dict"):
+            if not (
+                hasattr(self, "balanced_subsets") and \
+                hasattr(self, "dummy_dataset_len") and \
+                hasattr(self, "dummy_subset_len")
+            ):
                 subsets = []
                 for data_path, image_folder in zip(self.data_args.data_path, self.data_args.image_folder):
                     list_data_dict = json.load(open(data_path, "r"))
@@ -62,18 +67,20 @@ class OrientedDetSFTDataset(Dataset):
                         data_dict["image_folder"] = image_folder
                     subsets.append(list_data_dict)
 
-                mul_ratios = [len(subset) for subset in subsets]
-                self.dummy_dataset_len = sum(mul_ratios)
-                mul_ratios = [round(max(mul_ratios) / v) for v in mul_ratios]
-                mul_ratios = [v if v > 1.8 else 1 for v in mul_ratios]
+                len_subset = [len(subset) for subset in subsets]
+                self.dummy_dataset_len = sum(len_subset)
+                self.dummy_subset_len = math.ceil(self.dummy_dataset_len / len(subsets))
 
-                self.list_all_data_dict = []
-                for subset, mul_ratio in zip(subsets, mul_ratios):
-                    self.list_all_data_dict.extend(subset * mul_ratio)
+                subsets = [subset * math.ceil(self.dummy_subset_len / len(subset)) for subset in subsets]
+                self.balanced_subsets = subsets
 
             print(f"making list_data_dict with seed {epoch}")
-            self.list_data_dict = random.Random(epoch).sample(self.list_all_data_dict, self.dummy_dataset_len)
-
+            rnd = random.Random(epoch)
+            self.list_data_dict = []
+            for subset in self.balanced_subsets:
+                self.list_data_dict.extend(rnd.sample(subset, self.dummy_subset_len))
+            rnd.shuffle(self.list_data_dict)
+            self.list_data_dict = self.list_data_dict[:self.dummy_dataset_len]
         elif self.data_args.dataset_mode == "single":
             pass
         else:
@@ -243,6 +250,7 @@ class OrientedDetEvalDataset:
         "fair1m_2.0_train": "playground/data/split_ss_fair1m_2_0",
         "srsdd": "playground/data/SRSDD",
         "dota_train": "playground/data/split_ss_dota",
+        "rsar": "playground/data/RSAR",
     }
     
     func_map = {  # dataset_type: (is_test_set, not is_test_set)
@@ -252,6 +260,7 @@ class OrientedDetEvalDataset:
         "fair1m_2.0_train": ("initialize_coco_format_fair1m_dataset", "initialize_coco_format_fair1m_dataset"),
         "srsdd": ("initialize_coco_format_srsdd_dataset", "initialize_coco_format_srsdd_dataset"),
         "dota_train": ("initialize_dota_dataset", "initialize_dota_dataset"),
+        "rsar": ("initialize_rsar_dataset", "initialize_coco_format_rsar_dataset"),
     }
 
     def __init__(self, dataset_type="dota", data_root=None, shuffle_seed=42, clip_num=None, is_test_set=False):
@@ -388,6 +397,26 @@ class OrientedDetEvalDataset:
         classes = ('Cell-Container', 'Container', 'Dredger', 'Fishing', 'LawEnforce', 'ore-oil')
         ann_file = 'test.json' if self.is_test_set else 'train.json'
         img_prefix = 'test/images/' if self.is_test_set else 'train/images/'
+        self.dataset = self.initialize_coco_format_dataset(self.data_root, classes, ann_file, img_prefix)
+
+    def initialize_rsar_dataset(self):
+        from lmmrotate.modules.rsar_dataset import RSARDataset
+        self.dataset = RSARDataset(
+            data_root=self.data_root, 
+            ann_file='test/annfiles/' if self.is_test_set else 'trainval/annfiles/',  # you may require `cat train.txt val.txt > trainval.txt` to generate this file
+            data_prefix=dict(img_path='test/images/') if self.is_test_set else dict(img_path='trainval/images/'),
+            test_mode=True,
+            pipeline=[
+                dict(type='mmdet.LoadAnnotations', with_bbox=True, box_type='qbox'),
+                dict(type='ConvertBoxType', box_type_mapping=dict(gt_bboxes='rbox')),
+                dict(type='mmdet.PackDetInputs', meta_keys=('img_id', 'img_path', 'file_name'))
+            ]
+        )
+
+    def initialize_coco_format_rsar_dataset(self):
+        classes = ('ship', 'aircraft', 'car', 'tank', 'bridge', 'harbor')
+        ann_file = 'test.json' if self.is_test_set else 'trainval.json'
+        img_prefix = 'test/images/' if self.is_test_set else 'trainval/images/'
         self.dataset = self.initialize_coco_format_dataset(self.data_root, classes, ann_file, img_prefix)
 
     @staticmethod
