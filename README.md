@@ -22,7 +22,7 @@ We are still working in progress~ Hence, the codebase may be updated frequently
 
 This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for oriented object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**.
 
-<img src="https://github.com/user-attachments/assets/cf18cc4c-d2d4-490b-87c0-3956d3b7cb9b" alt="framework" width="100%" />
+<img src="https://github.com/user-attachments/assets/d34e4c0c-9e04-446e-a511-2e7005e32074" alt="framework" width="100%" />
 
 ## Performance
 
