@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">A Simple Aerial Detection Baseline of Multimodal Language Models</h1>
+  <h1 align="center">LMMRotate 🎮: A Simple Aerial Detection Baseline of Multimodal Language Models</h1>
   <p align="center">
       <a href='https://scholar.google.com/citations?hl=en&user=TvsTun4AAAAJ' style='text-decoration: none' >Qingyun Li</a><sup></sup>&emsp;
       <a href='https://scholar.google.com/citations?user=A39S7JgAAAAJ&hl=en' style='text-decoration: none' >Yushi Chen</a><sup></sup>&emsp;
@@ -17,8 +17,6 @@
     </p>
    </p>
 </p>
-
-# lmmrotate 🎮
 
 We are still working in progress~ Hence, the codebase may be updated frequently
 
