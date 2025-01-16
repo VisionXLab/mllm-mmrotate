@@ -175,6 +175,12 @@ Some options of the [map_nc eval script](lmmrotate/eval.py):
 - `clip_num`: when you want to get results fast or visualize the results, you can clip the dataset.
 - `shuffle_seed`: seed for clip dataset.
 
+## Contact and Acknowledge
+
+Feel free to contact me through my email (21b905003@stu.hit.edu.cn) or [github issue](https://github.com/Li-Qingyun/mllm-mmrotate/issues). I'll continue to maintain this repo.
+
+The code is based on [MMRotate](https://github.com/open-mmlab/mmrotate) and [Transformers](https://github.com/huggingface/transformers). Many modules refer to [InternVL](https://github.com/OpenGVLab/InternVL) and [LLaVA](https://github.com/haotian-liu/LLaVA). The model architecture benefits from the open-source general-purpose vision-language model [Florence-2](https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de). Thanks for their brilliant works.
+
 ## Citation
 
 If you find our paper or benchmark helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you very much!
