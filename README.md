@@ -28,6 +28,8 @@ This repo aims to fine-tune **L**arge **M**ultimodal language **M**odels for ori
 
 ## Performance
 
+Get model weight on [Huggingface](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
+
 [Click here](https://github.com/user-attachments/assets/f61edcd2-1dee-4bdb-8a1e-c8dd1cf163a1) for the visualization of the MLM detector.
 
 ## Enviroment
