@@ -32,6 +32,10 @@ Get model weight on [Huggingface](https://huggingface.co/collections/Qingyun/lmm
 
 [Click here](https://github.com/user-attachments/assets/f61edcd2-1dee-4bdb-8a1e-c8dd1cf163a1) for the visualization of the MLM detector.
 
+<img src="https://github.com/user-attachments/assets/6d6141d6-b813-4f88-a74d-b90d13323f56" alt="framework" width="80%" />
+
+The `mAP_nc` represents 'mAP without confidence score'. As our detector does not output confidence score, we use mAP_nc and mF_1 as evaluation metrics. You can refer to the technical report paper for more details.
+
 ## Enviroment
 **NOTE: a misaligned enviroment between inference and training may cause bad effect.**
 
