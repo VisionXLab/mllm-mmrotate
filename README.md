@@ -10,7 +10,7 @@
       <a href='https://yangxue0827.github.io/' style='text-decoration: none' >Xue Yang</a><sup></sup>&emsp;
       <div align="center">
       <a href='https://arxiv.org/abs/2501.09720'><img src='https://img.shields.io/badge/arXiv-2501.09720-brown.svg?logo=arxiv&logoColor=white'></a>
-      <a href='https://huggingface.co/your_username/your_model'><img src='https://img.shields.io/badge/HuggingFace-Model-yellow.svg?logo=HuggingFace&logoColor=white'></a>
+      <a href='[https://huggingface.co/your_username/your_model](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)'><img src='https://img.shields.io/badge/HuggingFace-Model-yellow.svg?logo=HuggingFace&logoColor=white'></a>
 	  </div>
     <p align='center'>
         If you find our work helpful, please consider giving us a ⭐!
