@@ -9,7 +9,7 @@
       <a href='https://scholar.google.com/citations?user=OYtSc4AAAAAJ&hl=en' style='text-decoration: none' >Yi Yu</a><sup></sup>&emsp;     
       <a href='https://yangxue0827.github.io/' style='text-decoration: none' >Xue Yang</a><sup></sup>&emsp;
       <div align="center">
-      <a href='https://arxiv.org/abs/xxxx.xxxxx'><img src='https://img.shields.io/badge/arXiv-xxxx.xxxxx-brown.svg?logo=arxiv&logoColor=white'></a>
+      <a href='https://arxiv.org/abs/2501.09720'><img src='https://img.shields.io/badge/arXiv-2501.09720-brown.svg?logo=arxiv&logoColor=white'></a>
       <a href='https://github.com/Li-Qingyun/mllm-mmrotate'><img src='https://img.shields.io/badge/Github-page-yellow.svg?logo=Github&logoColor=white'></a>
 	  </div>
     <p align='center'>
