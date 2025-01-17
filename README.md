@@ -32,7 +32,7 @@ Get model weight on [Huggingface](https://huggingface.co/collections/Qingyun/lmm
 
 <img src="https://github.com/user-attachments/assets/6d6141d6-b813-4f88-a74d-b90d13323f56" alt="framework" width="80%" />
 
-The `mAP_nc` represents 'mAP without confidence score'. As our detector does not output confidence score, we use mAP_nc and mF_1 as evaluation metrics. You can refer to the technical report paper for more details.
+The `mAP_nc` represents 'mAP without confidence score'. As our detector does not output confidence score, we use mAP_nc and mF_1 as evaluation metrics. You can refer to the [technical report paper](https://arxiv.org/abs/2501.09720) for more details.
 
 ## Enviroment
 **NOTE: a misaligned enviroment between inference and training may cause bad effect.**
