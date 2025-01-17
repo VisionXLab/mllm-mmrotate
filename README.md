@@ -10,7 +10,7 @@
       <a href='https://yangxue0827.github.io/' style='text-decoration: none' >Xue Yang</a><sup></sup>&emsp;
       <div align="center">
       <a href='https://arxiv.org/abs/2501.09720'><img src='https://img.shields.io/badge/arXiv-2501.09720-brown.svg?logo=arxiv&logoColor=white'></a>
-      <a href='https://github.com/Li-Qingyun/mllm-mmrotate'><img src='https://img.shields.io/badge/Github-page-yellow.svg?logo=Github&logoColor=white'></a>
+      <a href='https://huggingface.co/your_username/your_model'><img src='https://img.shields.io/badge/HuggingFace-Model-yellow.svg?logo=HuggingFace&logoColor=white'></a>
 	  </div>
     <p align='center'>
         If you find our work helpful, please consider giving us a ⭐!
@@ -191,7 +191,7 @@ If you find our paper or benchmark helpful for your research, please consider ci
 @article{li2025lmmrotate,
   title={A Simple Aerial Detection Baseline of Multimodal Language Models},
   author={Li, Qingyun and Chen, Yushi and Shu, Xinya and Chen, Dong and He, Xin and Yu Yi and Yang, Xue },
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
+  journal={arXiv preprint arXiv:2501.09720},
   year={2025}
 }
 ```
