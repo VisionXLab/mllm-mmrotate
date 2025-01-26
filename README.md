@@ -32,7 +32,7 @@ Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780
 
 [**Click here**](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) for the visualization of the MLM detector, you can zoom in for a clearer view.
 
-<img src="https://github.com/user-attachments/assets/6d6141d6-b813-4f88-a74d-b90d13323f56" alt="framework" width="80%" />
+<img src="https://github.com/user-attachments/assets/2cde8e09-a096-4255-9d92-825db789afc5" alt="framework" width="80%" />
 
 NOTE: The results of joint trained Florence-2-large models above in current [technical report paper](https://arxiv.org/abs/2501.09720) will be updated soon.
 
