@@ -42,6 +42,8 @@ The `mAP_nc` represents 'mAP without confidence score'. As our detector does not
 
 First, refer to [Enviroment.md](Enviroment.md) to prepare an enviroment.
 
+Then, refer to [Data](https://huggingface.co/datasets/Qingyun/lmmrotate-sft-data) to prepare/download the data.
+
 > NOTE:
 > 1. We support multi-nodes distributed training based on SLURM. If your resource platform is different and requires multi-nodes distributed training, you may need adapt the shell scripts to your platform. Or you can mult the node count to gradient_accumulation_steps option. Concat us in [issue](https://github.com/Li-Qingyun/mllm-mmrotate/issues) for more support.
 > 2. The v2 in script name to record data version is response format version, not dataset version. `dota1-v2` means DOTA-v1.0 of 2-th response.
