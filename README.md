@@ -96,7 +96,7 @@ Some options of the [training script](lmmrotate/train.py):
 - `model_revision`: commit id of the model on huggingface hub. (Florence-2-large had an update, which is not used in this repo.)
 - `language_model_lora`: lora option similar to internvl.
 - `response_format`: box encoding and decoding format.
-- ...... (Concat me in [issue](https://github.com/Li-Qingyun/mllm-mmrotate/issues) if there are questions.)
+- ...... (Contact me in [issue](https://github.com/Li-Qingyun/mllm-mmrotate/issues) if there are questions.)
 
 Some options of the [map_nc eval script](lmmrotate/eval.py):
 
