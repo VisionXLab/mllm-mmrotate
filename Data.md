@@ -38,7 +38,7 @@ huggingface-cli download Qingyun/lmmrotate-sft-data --repo-type dataset --local-
 Then, extract all files from the compressed files.
 
 ```
-find . -name "*.tar.gz" -execdir tar -zxvf {} \;
+find . \( -name "*.tar.gz" -o -name "*.part0" \) -execdir bash -c '[[ "{}" =~ \.part0$ ]] && cat {} {}.part1 | tar -zxvf - || tar -zxvf {}' \;
 ```
 
 At last, if required, you can delete all the compressed files.
@@ -53,7 +53,7 @@ find . -type f -name "*.tar.gz*" -exec rm -f {} \;
 
 - `split_ss_dota`: The simplest `split_ss_dota` prepared following [official instruction in MMRotate](https://github.com/open-mmlab/mmrotate/tree/1.x/tools/data/dota). We add `train` and `val` folders, which only have individual light `annfiles` folders and share `images` folder with `trainval` split.
 - `split_ss_fair1m_1_0` and `split_ss_fair1m_2_0`: We just use script in [this csdn blog](https://blog.csdn.net/weixin_45453121/article/details/132224388) to convert the fair1m xml files into DOTA format to reuse tools of DOTA. We then follow [whollywood](https://github.com/yuyi1005/whollywood) to prepare the dataset. NOTE that the differences between FAIR1M-v1.0 and FAIR1M-v2.0 are (Hence, FAIR1M-v1.0 and FAIR1M-v2.0 share the `train` split):
->  Compared with 1.0, validation sets have been added in FAIR1M 2.0, and test set have been expanded. The train set of FAIR1M-1.0 and FAIR1M-2.0 are consistent. ([Description](https://gaofen-challenge.com/benchmark
+>  Compared with 1.0, validation sets have been added in FAIR1M 2.0, and test set have been expanded. The train set of FAIR1M-1.0 and FAIR1M-2.0 are consistent. ([Description](https://gaofen-challenge.com/benchmark))
 - `DIOR-R`: The simplest `dior` prepared following [official instruction in MMRotate](https://github.com/open-mmlab/mmrotate/tree/1.x/tools/data/dior). We concat ImageSets/Main/train.txt and ImageSets/Main/val.txt into ImageSets/Main/trainval.txt, so you do not need to use the ConcatDataset for `trainval` split.
 - `SRSDD`: The simplest `srsdd` prepared following [official instruction in MMRotate](https://github.com/open-mmlab/mmrotate/tree/1.x/tools/data/dior). We also add json format annotation prepared with [this script](https://huggingface.co/datasets/Qingyun/lmmrotate-sft-data/blob/main/SRSDD/convert_ann_to_json.py).
 - `RSAR`: The simplest `rsar` prepared following [official instruction in RSAR](https://github.com/zhasion/RSAR?tab=readme-ov-file#2-dataset-prepare). **You need to run [this script](https://huggingface.co/datasets/Qingyun/lmmrotate-sft-data/blob/main/RSAR/symlink_creator.py) to prepare `trainval` folder.**
