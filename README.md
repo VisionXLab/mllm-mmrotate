@@ -20,7 +20,7 @@
 
 This repo is a technical practice to fine-tune **L**arge **M**ultimodal language **M**odels for oriented object detection as in [MMRotate](https://github.com/open-mmlab/mmrotate) and hosts the official implementation of the paper: **A Simple Aerial Detection Baseline of Multimodal Language Models**.
 
-<img src="https://github.com/user-attachments/assets/dcc2353f-4060-40e1-95d7-f926242691b2" alt="framework" width="100%" />
+<img src="https://github.com/user-attachments/assets/d34e4c0c-9e04-446e-a511-2e7005e32074" alt="framework" width="100%" />
 
 We currently support fine-tuning and evaluating [Florence-2](https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de) models on three optical datasets (DOTA-v1.0, DIOR-R, FAIR1M-v1.0) and two SAR datasets (SRSDD, RSAR) as reproductions of experimental results in the [technical report paper](https://arxiv.org/abs/2501.09720). Thanks to the strong grounding and detection performance of the pre-trained foundation model, our [detection performance](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) rivals conventional detectors (e.g., RetinaNet, FCOS), even in challenging scenarios with dense and small-scale objects in the images. We hope that this baseline will serve as a reference for future MLM development, enabling more comprehensive capabilities for understanding remote sensing data.
 
@@ -32,7 +32,7 @@ Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780
 
 [**Click here**](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) for the visualization of the MLM detector, you can zoom in for a clearer view.
 
-<img src="https://github.com/user-attachments/assets/2cde8e09-a096-4255-9d92-825db789afc5" alt="framework" width="80%" />
+<img src="https://github.com/user-attachments/assets/dcc2353f-4060-40e1-95d7-f926242691b2" alt="framework" width="80%" />
 
 NOTE: The results of joint trained Florence-2-large models above in current [technical report paper](https://arxiv.org/abs/2501.09720) will be updated soon.
 
