@@ -32,9 +32,7 @@ Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780
 
 [**Click here**](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) for the visualization of the MLM detector, you can zoom in for a clearer view.
 
-<img src="https://github.com/user-attachments/assets/2cde8e09-a096-4255-9d92-825db789afc5" alt="framework" width="80%" />
-
-NOTE: The results of joint trained Florence-2-large models above in current [technical report paper](https://arxiv.org/abs/2501.09720) will be updated soon.
+<img src="https://github.com/user-attachments/assets/dcc2353f-4060-40e1-95d7-f926242691b2" alt="framework" width="80%" />
 
 The `mAP_nc` represents 'mAP without confidence score'. As our detector does not output confidence score, we use mAP_nc and mF_1 as evaluation metrics. You can refer to the [technical report paper](https://arxiv.org/abs/2501.09720) for more details. [This notebook](https://github.com/Li-Qingyun/mllm-mmrotate/blob/master/playground/evaluate_without_scores.ipynb) provides the practices during exploring stage.
 
