@@ -120,6 +120,17 @@ Some options of the [map_nc eval script](lmmrotate/eval.py):
 - `clip_num`: when you want to get results fast or visualize the results, you can clip the dataset.
 - `shuffle_seed`: seed for clip dataset.
 
+### Update to the latest version
+
+We may update the codebase, the commit log is [here](https://github.com/VisionXLab/mllm-mmrotate/commits/master/).
+
+If you have installed the previous version and would like to update to the latest version, you can:
+```
+cd mllm-mmrotate
+git pull origin master  # if you have modification, commit your changes and merge the branches
+pip install -e .
+```
+
 ## Contact and Acknowledge
 
 Feel free to contact me through my email (21b905003@stu.hit.edu.cn) or [github issue](https://github.com/Li-Qingyun/mllm-mmrotate/issues). I'll continue to maintain this repo.
