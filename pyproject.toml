@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lmmrotate"
-version = "0.1.0"
+version = "1.0.0"
 description = "A training codebase of multimodal language model for orientated detection."
 authors = [
     { name = "Li-Qingyun", email = "962537281@qq.com" },
