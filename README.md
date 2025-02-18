@@ -24,8 +24,6 @@ This repo is a technical practice to fine-tune **L**arge **M**ultimodal language
 
 We currently support fine-tuning and evaluating [Florence-2](https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de) models on three optical datasets (DOTA-v1.0, DIOR-R, FAIR1M-v1.0) and two SAR datasets (SRSDD, RSAR) as reproductions of experimental results in the [technical report paper](https://arxiv.org/abs/2501.09720). Thanks to the strong grounding and detection performance of the pre-trained foundation model, our [detection performance](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) rivals conventional detectors (e.g., RetinaNet, FCOS), even in challenging scenarios with dense and small-scale objects in the images. We hope that this baseline will serve as a reference for future MLM development, enabling more comprehensive capabilities for understanding remote sensing data.
 
-We'll also release a resource-friendly setting to enable conducting experiments on consumer-grade GPUs like RTX4090 (working in progress currently).
-
 ## Performance
 
 Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df) on [Huggingface](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
@@ -36,7 +34,7 @@ Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780
 
 The `mAP_nc` represents 'mAP without confidence score'. As our detector does not output confidence score, we use mAP_nc and mF_1 as evaluation metrics. You can refer to the [technical report paper](https://arxiv.org/abs/2501.09720) for more details. [This notebook](https://github.com/Li-Qingyun/mllm-mmrotate/blob/master/playground/evaluate_without_scores.ipynb) provides the practices during exploring stage.
 
-## Get Started (WIP)
+## Get Started
 
 First, refer to [Enviroment.md](Enviroment.md) to prepare an enviroment.
 
@@ -51,15 +49,29 @@ Then, refer to [Data.md](Data.md) to prepare/download the data.
 
 - train an aerial detector based on [Florence-2-large](https://huggingface.co/microsoft/Florence-2-large) on DOTA-v1.0:
 ```shell
-srun ... bash scripts/florence-2-l_vis1024-lang2048_dota1-v2_b2x16-100e.sh
-bash scripts/florence-2-l_vis1024-lang2048_dota1-v2_b2x8xga2-100e.sh
+# You can train the model on a standalone with 4xRTX4090:
+bash scripts/florence-2-l_vis1024-lang2048_dota1-v2_b2x4xga4-50e.sh
+# If you have multi-node cluster based on Slurm, you can also train the model on 16 gpus:
+srun -p <your slurm partition> --job-name=lmmrotate-dota-train \
+    --gres=gpu:8 --ntasks=2 --ntasks-per-node=1 --cpus-per-task=96 \
+    --kill-on-bad-exit=1 --quotatype=reserved \
+    bash scripts/florence-2-l_vis1024-lang2048_dota1-v2_b2x16-100e.sh
+```
+- inference and get mAP_nc on DOTA-v1.0:
+```shell
+# Using single gpu:
+bash scripts/eval_standalone.sh <checkpoint folder path>
+# For a standalone with 4xRTX4090:
+NGPUS=4 bash scripts/eval_standalone.sh <checkpoint folder path>
+# For Slurm users:
+srun -p <your slurm partition> --job-name=lmmrotate-dota-eval \
+    --gres=gpu:8 --ntasks=<nodes number> --ntasks-per-node=1 --cpus-per-task=96 \
+    --kill-on-bad-exit=1 --quotatype=reserved \
+    bash scripts/eval_slurm.sh <checkpoint folder path>
 ```
 
-- evaluate the model on DOTA-v1.0:
+- get f1:
 ```shell
-# get map nc
-srun ... bash scripts/eval_slurm.sh <checkpoint folder path>
-bash scripts/eval_standalone.sh <checkpoint folder path>
 # then get f1
 python -u -m lmmrotate.modules.f1_metric <checkpoint folder path>/<pkl file>
 ```
