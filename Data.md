@@ -12,11 +12,17 @@ I will continue to maintain the dataset.
 
 ## Downloading Guide
 
+First, read the [Statement and ToU](https://github.com/VisionXLab/mllm-mmrotate/blob/master/Data.md#statement-and-tou), if aggred, go to [our dataset page](https://huggingface.co/datasets/Qingyun/lmmrotate-sft-data) and click the following button to access the dataset, your request will be approved automatically. NOTE once you request means that you agree with our ToU.
+
+![request](https://github.com/user-attachments/assets/49b25c40-64f6-42cb-8592-5166dedd2368)
+
 You can download with your web browser on [the file page](https://huggingface.co/datasets/Qingyun/lmmrotate-sft-data/tree/main).
 
 We recommand downloading in terminal using huggingface-cli (`pip install --upgrade huggingface_cli`). You can refer to [the document](https://huggingface.co/docs/huggingface_hub/guides/download) for more usages.
 
 ```
+# log in for huggingface account (if required, you can create your token at https://huggingface.co/settings/tokens)
+huggingface-cli login
 # Set Huggingface Mirror for Chinese users (if required):
 export HF_ENDPOINT=https://hf-mirror.com 
 # Download the whole folder (you can also modify local-dir with your data path and make soft link here):
