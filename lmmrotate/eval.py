@@ -64,6 +64,7 @@ def parse_args():
     parser.add_argument("--eval_intermediate_checkpoints", action="store_true", default=False)
     parser.add_argument("--vis", action="store_true", default=False)
     parser.add_argument("--pass_evaluate", action="store_true", default=False)
+    parser.add_argument("--clear_pred_for_empty_gt", action="store_true", default=False)
     # dataset options
     parser.add_argument("--dataset_type", type=str, default=None, choices=["dota", "dior", "fair1m", "srsdd", "dota_train", "fair1m_2.0_train", "rsar"])
     parser.add_argument("--data_root", type=str, default=None)
@@ -76,6 +77,7 @@ def parse_args():
 
     if args.dataset_type is None:
         def determine_dataset_type(path):
+            path = path.lower()
             if "dota" in path and "train" in path and "trainval" not in path:
                 return "dota_train"  # train on `train` split, eval on `val` split
             elif "dota" in path:
@@ -254,7 +256,7 @@ def get_evaluator(dataset_type, is_test_set, results_path=None):
         raise ValueError(f"Unknown dataset type {dataset_type}")
           
             
-def evaluate_results(answers_path, dataset=None, vis_root=None):
+def evaluate_results(answers_path, dataset=None, vis_root=None, clear_pred_for_empty_gt=False):
     if dataset is None:
         dataset = OrientedDetEvalDataset()
         
@@ -282,6 +284,14 @@ def evaluate_results(answers_path, dataset=None, vis_root=None):
         pred_instances = postprocess_parsed_answer(parsed_answer, dataset.cls_map, logger)
         data_sample.pred_instances = pred_instances
         samplelist_boxtype2tensor([data_sample])
+        
+        if clear_pred_for_empty_gt:
+            if len(data_sample.gt_instances.bboxes) == 0:
+                empty_pred_instances = InstanceData()
+                empty_pred_instances.bboxes = data_sample.pred_instances.bboxes[:0]
+                empty_pred_instances.labels = data_sample.pred_instances.labels[:0]
+                empty_pred_instances.scores = data_sample.pred_instances.scores[:0]
+                data_sample.pred_instances = empty_pred_instances
         
         data_sample_dict = data_sample.to_dict()
         pickle_results.append(data_sample_dict)
@@ -351,7 +361,7 @@ if __name__ == "__main__":
     if rank == 0 and not args.pass_evaluate:
         for split, todos in evaluate_todos.items():
             for answers_path, vis_root in todos:
-                evaluate_results(answers_path, datasets[split], vis_root)
+                evaluate_results(answers_path, datasets[split], vis_root, args.clear_pred_for_empty_gt)
                 
     dist.barrier()
     dist.destroy_process_group()
