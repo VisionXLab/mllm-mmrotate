@@ -1,3 +1,8 @@
+"""
+TODO in future versions:
+- resolve the bounding problem (because Florence2 requires clip_0_999)
+"""
+
 import os
 import sys
 import math
@@ -38,7 +43,7 @@ def get_processor():
     return Florence2Processor.from_pretrained("microsoft/Florence-2-large", revision="f92844072980ab91bc708ae2fc8c1227318023a4")
 
 
-def main_convert_data_to_florence2fmt(ann_path, save_path, version=2):
+def main_convert_data_to_florence2fmt(ann_path, save_path, version=3):
     processor = get_processor()
     tokenizer = processor.tokenizer
     coordinates_quantizer = processor.post_processor.coordinates_quantizer
@@ -72,44 +77,49 @@ def main_convert_data_to_florence2fmt(ann_path, save_path, version=2):
     for img in images:
         img_id = img["id"]
         if img_id not in imgid2annlist:
-            continue
-        img_ann_list = imgid2annlist[img_id]
-        
-        img_ann_list = [
-            {
-                "polygon": clip_0_999(quantize(normalize_polygon(ann["segmentation"][0], False), width=img["width"], height=img["height"])),
-                "cat_rank": categoryid2rank[ann["category_id"]],
-                "cat_name": categoryid2name[ann["category_id"]].replace("-", " ").lower(),
-            }
-            for ann in img_ann_list
-        ]  # simplify the annotation
-        
-        img_ann_list.sort(key=lambda ann: (
-            ann["cat_rank"], ann["polygon"][1], ann["polygon"][0]
-        ))
-        
-        response = ""
-        last_cat_name = None
-        for ann in img_ann_list:
-            polygon = ann["polygon"]
-            cat_name = ann["cat_name"]
-            
-            if version == 2:
-                if cat_name != last_cat_name:
-                    response += cat_name
-                else:
-                    response += "<sep>"
-            elif version == 1:
-                if cat_name != last_cat_name:
-                    response += cat_name
+            if version < 3:
+                continue
             else:
-                raise ValueError(f"Invalid version: {version}")
+                img["response"] = 'There are none.'
+                new_data.append(img)
+        else:
+            img_ann_list = imgid2annlist[img_id]
             
-            response += "".join(f"<loc_{v}>" for v in polygon)
-            last_cat_name = cat_name
+            img_ann_list = [
+                {
+                    "polygon": clip_0_999(quantize(normalize_polygon(ann["segmentation"][0], False), width=img["width"], height=img["height"])),
+                    "cat_rank": categoryid2rank[ann["category_id"]],
+                    "cat_name": categoryid2name[ann["category_id"]].replace("-", " ").lower(),
+                }
+                for ann in img_ann_list
+            ]  # simplify the annotation
             
-        img["response"] = response
-        new_data.append(img)
+            img_ann_list.sort(key=lambda ann: (
+                ann["cat_rank"], ann["polygon"][1], ann["polygon"][0]
+            ))
+            
+            response = ""
+            last_cat_name = None
+            for ann in img_ann_list:
+                polygon = ann["polygon"]
+                cat_name = ann["cat_name"]
+                
+                if version >= 2:
+                    if cat_name != last_cat_name:
+                        response += cat_name
+                    else:
+                        response += "<sep>"
+                elif version == 1:
+                    if cat_name != last_cat_name:
+                        response += cat_name
+                else:
+                    raise ValueError(f"Invalid version: {version}")
+                
+                response += "".join(f"<loc_{v}>" for v in polygon)
+                last_cat_name = cat_name
+                
+            img["response"] = response
+            new_data.append(img)
 
     with open(save_path, "w") as fp:
         json.dump(new_data, fp)
@@ -156,7 +166,7 @@ def main_convert_to_llava_fmt(src_path, tgt_path):
     print(f"Save to {tgt_path}")
     
     
-def test_visualize_converted_data(ann_path, image_folder, version=2):
+def test_visualize_converted_data(ann_path, image_folder, version=3):
     processor = get_processor()
     with open(ann_path, "r") as fp:
         data = json.load(fp)
@@ -179,6 +189,10 @@ def test_visualize_converted_data(ann_path, image_folder, version=2):
     for sample in data:
         file_name = sample["file_name"]
         response = sample["response"]
+        
+        if response == 'There are none.':
+            continue
+        
         width = sample["width"]
         height = sample ["height"]
         
@@ -257,7 +271,7 @@ if __name__ == "__main__":
             print(f"Function {func_name} not found.")
     else:
         # python scripts_py/convert_dota_for_sft.py
-        version = 2
+        version = 3
 
         # DOTA
         ann_path = f"{playground_path}/data/split_ss_dota/trainval.json"
