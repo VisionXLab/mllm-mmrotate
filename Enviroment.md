@@ -39,10 +39,15 @@ pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorc
 # install mim
 pip install openmim
 
-# install mmcv
+# install mmcv (three manners)
+# install from branch forked by Li-Qingyun (recommanded)
+git clone https://github.com/Li-Qingyun/mmcv.git $SITE_PACKAGES_PATH/mmcv
+cd $SITE_PACKAGES_PATH/mmcv
+git checkout v2.0.1-lqy-fix
+bash install.sh
 # install with openmim
 mim install "mmcv==2.0.1"
-# install from source (recommanded)
+# install from source
 git clone https://github.com/open-mmlab/mmcv.git $SITE_PACKAGES_PATH/mmcv
 cd $SITE_PACKAGES_PATH/mmcv
 git checkout v2.0.1
