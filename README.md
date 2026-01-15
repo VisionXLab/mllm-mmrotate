@@ -144,10 +144,12 @@ The code is based on [MMRotate](https://github.com/open-mmlab/mmrotate) and [Tra
 If you find our paper or benchmark helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you very much!
 
 ```bibtex
-@article{li2025lmmrotate,
-  title={A Simple Aerial Detection Baseline of Multimodal Language Models},
-  author={Li, Qingyun and Chen, Yushi and Shu, Xinya and Chen, Dong and He, Xin and Yu Yi and Yang, Xue },
-  journal={arXiv preprint arXiv:2501.09720},
-  year={2025}
+@INPROCEEDINGS{li2025lmmrotate,
+  author={Li, Qingyun and He, Xin and Shu, Xinya and Yu, Yi and Chen, Dong and Chen, Yushi and Yang, Xue},
+  booktitle={IGARSS 2025 - 2025 IEEE International Geoscience and Remote Sensing Symposium}, 
+  title={A Simple Aerial Detection Baseline of Multimodal Language Models}, 
+  year={2025},
+  pages={6833-6837},
+  doi={10.1109/IGARSS55030.2025.11242725}
 }
 ```
