@@ -24,6 +24,18 @@ This repo is a technical practice to fine-tune **L**arge **M**ultimodal language
 
 We currently support fine-tuning and evaluating [Florence-2](https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de) models on three optical datasets (DOTA-v1.0, DIOR-R, FAIR1M-v1.0) and two SAR datasets (SRSDD, RSAR) as reproductions of experimental results in the [technical report paper](https://arxiv.org/abs/2501.09720). Thanks to the strong grounding and detection performance of the pre-trained foundation model, our [detection performance](https://github.com/user-attachments/assets/2f45fad2-bab9-45f3-8b7f-fdd1a16db335) rivals conventional detectors (e.g., RetinaNet, FCOS), even in challenging scenarios with dense and small-scale objects in the images. We hope that this baseline will serve as a reference for future MLM development, enabling more comprehensive capabilities for understanding remote sensing data.
 
+> 🎉 The [**RSCoVLM**](https://github.com/VisionXLab/RSCoVLM) is out, which is the first multi-task vision-language model which excels in aerial detection. The model is based on [Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct). Both the multi-task model and detection-only model are open-sourced.
+>
+> Paper: [Co-Training Vision Language Models for Remote Sensing Multi-task Learning](https://arxiv.org/abs/2511.21272)
+> 
+> Code: [https://github.com/VisionXLab/RSCoVLM](https://github.com/VisionXLab/RSCoVLM)
+> 
+> Model (RSCoVLM): [https://huggingface.co/Qingyun/RSCoVLM-7B-2512](https://huggingface.co/Qingyun/RSCoVLM-7B-2512)
+>
+> Model (RSCoVLM-det): [https://huggingface.co/Qingyun/RSCoVLM-det-7B-2512](https://huggingface.co/Qingyun/RSCoVLM-det-7B-2512)
+> 
+> Data: [https://huggingface.co/datasets/Qingyun/remote-sensing-sft-data](https://huggingface.co/datasets/Qingyun/remote-sensing-sft-data)
+
 ## Performance
 
 Get [**model weight**](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df) on [Huggingface](https://huggingface.co/collections/Qingyun/lmmrotate-6780cabaf49c4e705023b8df)
@@ -141,7 +153,7 @@ The code is based on [MMRotate](https://github.com/open-mmlab/mmrotate) and [Tra
 
 ## Citation
 
-If you find our paper or benchmark helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you very much!
+If you find our paper or benchmark helpful for your research, please consider citing LMMRotate and RSCoVLM and giving this repo a star ⭐. Thank you very much!
 
 ```bibtex
 @INPROCEEDINGS{li2025lmmrotate,
@@ -151,5 +163,18 @@ If you find our paper or benchmark helpful for your research, please consider ci
   year={2025},
   pages={6833-6837},
   doi={10.1109/IGARSS55030.2025.11242725}
+}
+
+@ARTICLE{li2026rscovlm,
+  author={Li, Qingyun and Ma, Shuran and Luo, Junwei and Yu, Yi and Zhou, Yue and Wang, Fengxiang and Lu, Xudong and Wang, Xiaoxing and He, Xin and Chen, Yushi and Yang, Xue},
+  title={Co-Training Vision-Language Models for Remote Sensing Multi-Task Learning},
+  journal={Remote Sensing},
+  volume={18},
+  year={2026},
+  number={2},
+  article-number={222},
+  url={https://www.mdpi.com/2072-4292/18/2/222},
+  issn={2072-4292},
+  doi={10.3390/rs18020222}
 }
 ```
