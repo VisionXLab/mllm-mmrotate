@@ -151,6 +151,8 @@ Feel free to contact me through my email (21b905003@stu.hit.edu.cn) or [github i
 
 The code is based on [MMRotate](https://github.com/open-mmlab/mmrotate) and [Transformers](https://github.com/huggingface/transformers). Many modules refer to [InternVL](https://github.com/OpenGVLab/InternVL) and [LLaVA](https://github.com/haotian-liu/LLaVA). The model architecture benefits from the open-source general-purpose vision-language model [Florence-2](https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de). Thanks for their brilliant works.
 
+Many thanks to the Chinese WeChat article: [减论:《【1.17-arXiv】哈工大推出LMMRotate方法将多模态语言模型用于遥感检测！》](https://mp.weixin.qq.com/s/7A3SX1NiyKrlnJQZGNDLEA). There are many high-quality Chinese articles about latest remote sensing papers in their channel.
+
 ## Citation
 
 If you find our paper or benchmark helpful for your research, please consider citing LMMRotate and RSCoVLM and giving this repo a star ⭐. Thank you very much!
